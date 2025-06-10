@@ -25,6 +25,8 @@ Long description of module's purpose
         'security/ir.model.access.csv',
         'views/custom_production_view.xml',
         'views/custom_workorder.xml',
+        'reports/custom_ProductionOrder_template_inherit.xml',
+        'reports/action_custom_production_order_report.xml',
     ],
 
     'installable': True,
