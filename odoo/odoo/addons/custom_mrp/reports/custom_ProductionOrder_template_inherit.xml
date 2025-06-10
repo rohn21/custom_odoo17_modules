@@ -1,0 +1,18 @@
+<odoo>
+    <template id="custom_report_mrporder_inherit" inherit_id="mrp.report_mrporder">
+        <!-- Inject custom fields below the "Product to Produce" section -->
+        <xpath expr="//div[hasclass('row')][1]" position="after">
+            <div class="row">
+                <div class="col-6">
+                    <strong>Status:</strong> <span t-esc="o.x_status"/>
+                </div>
+                <div class="col-6">
+                    <strong>Quality Alert:</strong>
+                    <t t-if="o.x_qlty_alert">Below Threshold</t>
+                    <t t-else="">OK</t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
+
