@@ -1,0 +1,11 @@
+<odoo>
+    <record id="module_category_custom_crm" model="ir.module.category">
+        <field name="name">Custom CRM</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="group_crm_vip_user" model="res.groups">
+        <field name="name">CRM VIP Salesperson</field>
+        <field name="category_id" ref="custom_crm.module_category_custom_crm"/>
+    </record>
+</odoo>
