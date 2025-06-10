@@ -1,0 +1,88 @@
+<odoo>
+    <data>
+        <!-- Template: Custom Purchase Order Full Report Layout -->
+        <template id="report_purchaseorder_document_inherit_custom"
+                  inherit_id="purchase.report_purchaseorder_document">
+
+            <!-- Replace whole report layout -->
+            <xpath expr="." position="replace">
+                <t t-name="custom_purchase.report_purchaseorder_document_custom">
+                    <t t-set="o" t-value="doc"/>
+
+                    <!-- Custom Header -->
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-9 text-center">
+                                <div t-if="company.report_header"
+                                     t-field="company.report_header"
+                                     style="margin-top: 22px;" />
+                            </div>
+                            <div class="col-3 text-end">
+                                <img t-if="company.logo"
+                                     t-att-src="image_data_uri(company.logo)"
+                                     style="max-height: 45px;" alt="Logo"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <span t-if="company.partner_id">
+                                    <t t-esc="', '.join(filter(None, [
+                                        company.partner_id.name,
+                                        company.partner_id.street,
+                                        company.partner_id.city,
+                                        company.partner_id.state_id.name if company.partner_id.state_id else '',
+                                        company.partner_id.country_id.name if company.partner_id.country_id else '',
+                                        company.partner_id.zip
+                                    ]))"/>
+                                </span>
+                            </div>
+                        </div>
+                        <hr/>
+                    </div>
+
+                    <!-- Page Content inside standard internal layout -->
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <h2>Purchase Order</h2>
+                            <t t-set="doc_name" t-value="o.name"/>
+                            <t t-call="custom_purchase.report_purchaseorder_document_content_custom"/>
+                        </div>
+                    </t>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="report_purchaseorder_document_content_custom"
+                  inherit_id="purchase.report_purchaseorder_document_content">
+
+            <!-- Remove Table Headers -->
+            <xpath expr="//th[@name='th_discount']" position="replace"/>
+            <xpath expr="//th[@name='th_date_req']" position="replace"/>
+
+            <!-- Remove Corresponding Data Columns -->
+            <xpath expr="//td[span[@t-field='line.date_planned']]" position="replace"/>
+            <xpath expr="//td[span[span[@t-field='line.discount']]]" position="replace"/>
+
+            <!-- Replace Unit Price Cell with Custom Formatting -->
+            <xpath expr="//td[span[@t-field='line.price_unit']]" position="replace">
+                <td class="text-end">
+                    <span t-field="line.price_unit"
+                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                </td>
+            </xpath>
+
+            <!-- Add Signature Section after Notes -->
+            <xpath expr="//p[@t-field='o.notes']" position="after">
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <strong>Authorized Signature:</strong>
+                        <div style="border-bottom: 1px solid #000; height: 2em; width: 80%; margin-top: 0.5em;"></div>
+                        <p style="margin-top: 0.2em;">Name &amp; Title</p>
+                    </div>
+                </div>
+            </xpath>
+
+        </template>
+
+    </data>
+</odoo>

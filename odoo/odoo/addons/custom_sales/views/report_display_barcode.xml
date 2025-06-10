@@ -1,0 +1,28 @@
+<odoo>
+    <!--    ACTION FOR PRINTING BARCODE-->
+     <!--    BARCODE TEMPLATE-->
+   <template id="barcode_template">
+       <t t-call="web.html_container">
+           <t t-foreach="docs" t-as="doc">
+               <t t-call="web.external_layout">
+                   <div class="page">
+                       <div class="oe_structure"/>
+                       <div>
+                           <div class="col-5">
+                               <h2><span t-field="doc.name"/></h2><br/>
+                               <span style="margin-left:-60px;">
+                                   <img t-if="doc.x_barcode"
+                                        style="width:400px;height:70px;"
+                                        t-att-src="'report/barcode/?barcode_type=%s&amp;value=%s&amp;
+                                        width=%s&amp;height=%s'%('EAN13',doc.x_barcode,265,80)"/>
+                               </span>
+                               <div style="margin-left:100px" t-field="doc.x_barcode"/>
+                           </div>
+                       </div>
+                   </div>
+               </t>
+           </t>
+       </t>
+   </template>
+
+</odoo>

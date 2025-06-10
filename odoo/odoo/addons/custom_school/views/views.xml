@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <record id="view_class_a_student_form" model="ir.ui.view">-->
+<!--        <field name="name">class.a.student.form</field>-->
+<!--        <field name="model">class_a.student</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Class A Student">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="name"/>-->
+<!--                        <field name="roll_number"/>-->
+<!--                        <field name="marks_obtained"/>-->
+<!--                        <field name="grade" readonly="1"/>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+   <!-- Form view for ClassAStudent -->
+   <record model="ir.ui.view" id="class_a_student_form">
+       <field name="name">class_a.student.form</field>
+       <field name="model">class_a.student</field>
+       <field name="arch" type="xml">
+           <form>
+               <sheet>
+                   <group>
+                       <field name="marks_obtained"/>
+                       <field name="grade"/>
+                       <field name="name"/>
+                       <field name="roll_number"/>
+                   </group>
+                   <footer>
+                        <button name="action_approve" string="Approve" type="object"
+                                class="btn-primary" groups="custom_school.group_student_approver"
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="action_reject" string="Reject" type="object"
+                                class="btn-danger" groups="custom_school.group_student_approver"
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    </footer>
+               </sheet>
+           </form>
+       </field>
+   </record>
+   <!-- Form view for ClassBStudent -->
+   <record model="ir.ui.view" id="class_b_student_form">
+       <field name="name">class_b.student.form</field>
+       <field name="model">class_b.student</field>
+       <field name="arch" type="xml">
+           <form>
+               <sheet>
+                   <group>
+                       <field name="marks_obtained"/>
+                       <field name="grade"/>
+                       <field name="name"/>
+                       <field name="roll_number"/>
+                   </group>
+               </sheet>
+           </form>
+       </field>
+   </record>
+   <!-- Form view for ClassCStudent -->
+   <record model="ir.ui.view" id="class_c_student_form">
+       <field name="name">class_c.student.form</field>
+       <field name="model">class_c.student</field>
+       <field name="arch" type="xml">
+           <form>
+               <sheet>
+                   <group>
+                       <field name="marks_obtained"/>
+                       <field name="grade"/>
+                       <field name="name"/>
+                       <field name="roll_number"/>
+                   </group>
+               </sheet>
+           </form>
+       </field>
+   </record>
+
+    <record model="ir.ui.view" inherit_id="mrp.mrp_unbuild_tree_view">
+
+    </record>
+</odoo>

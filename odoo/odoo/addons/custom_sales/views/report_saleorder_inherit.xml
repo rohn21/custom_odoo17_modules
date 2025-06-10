@@ -1,0 +1,18 @@
+<odoo>
+  <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+    <!-- Insert once, e.g. under the header block -->
+    <xpath expr="//div[@class='page']/div[1]" position="after">
+<!--      <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>-->
+      <div class="row mt16">
+        <div class="col-6">
+          <strong>Project Code:</strong>
+          <span t-field="doc.x_project_code"/>
+        </div>
+        <div class="col-6">
+          <strong>Est. Shipping:</strong>
+          <span t-field="doc.x_estimated_shipping"/>
+        </div>
+      </div>
+    </xpath>
+  </template>
+</odoo>

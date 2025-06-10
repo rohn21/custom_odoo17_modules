@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="report_sale_order">
+       <t t-call="web.html_container">
+           <t t-foreach="docs" t-as="o">
+               <t t-call="web.external_layout">
+                   <div class="page">
+                <div class="oe_structure"/>
+                       <h2>Sale Order Report</h2>
+                       <br></br>
+                        <p><strong>Order:</strong> <span t-field="o.name"/></p>
+                        <p><strong>Customer:</strong> <span t-field="o.partner_id.name"/></p>
+                        <p><strong>Date:</strong> <span t-field="o.date_order"/></p>
+                        <p><strong>Total:</strong> <span t-field="o.amount_total"/></p>
+                    <!--inherited-custom fields-->
+                        <p><strong>Project Code:</strong> <span t-field="o.x_project_code"/></p>
+                        <p><strong>Estimated Shipping:</strong> <span t-field="o.x_estimated_shipping"/></p>
+
+                        <h4>Order Lines:</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Qty</th>
+                                    <th>Unit Price</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.order_line" t-as="line">
+                                    <tr>
+                                        <td><span t-field="line.product_id.name"/></td>
+                                        <td><span t-field="line.product_uom_qty"/></td>
+                                        <td><span t-field="line.price_unit"/></td>
+                                        <td><span t-field="line.price_subtotal"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                   </div>
+               </t>
+           </t>
+       </t>
+   </template>
+</odoo>

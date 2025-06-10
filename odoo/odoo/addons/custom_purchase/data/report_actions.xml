@@ -1,0 +1,12 @@
+<!--report_actions.xml-->
+<odoo>
+    <report
+        id="action_report_purchase_order"
+        model="purchase.order"
+        string="Purchase Order"
+        report_type="qweb-pdf"
+        name="custom_purchase.report_purchaseorder_document_inherit"
+        file="custom_purchase.report_purchaseorder_document_inherit"
+        print_report_name="'Purchase Order - ' + object.name"
+    />
+</odoo>

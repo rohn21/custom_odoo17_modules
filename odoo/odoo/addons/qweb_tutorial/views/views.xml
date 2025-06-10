@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="qweb_tutorial.list">
+      <field name="name">qweb_tutorial list</field>
+      <field name="model">qweb_tutorial.qweb_tutorial</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="qweb_tutorial.action_window">
+      <field name="name">qweb_tutorial window</field>
+      <field name="res_model">qweb_tutorial.qweb_tutorial</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="qweb_tutorial.action_server">
+      <field name="name">qweb_tutorial server</field>
+      <field name="model_id" ref="model_qweb_tutorial_qweb_tutorial"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="qweb_tutorial" id="qweb_tutorial.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="qweb_tutorial.menu_1" parent="qweb_tutorial.menu_root"/>
+    <menuitem name="Menu 2" id="qweb_tutorial.menu_2" parent="qweb_tutorial.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="qweb_tutorial.menu_1_list" parent="qweb_tutorial.menu_1"
+              action="qweb_tutorial.action_window"/>
+    <menuitem name="Server to list" id="qweb_tutorial" parent="qweb_tutorial.menu_2"
+              action="qweb_tutorial.action_server"/>
+-->
+  </data>
+</odoo>

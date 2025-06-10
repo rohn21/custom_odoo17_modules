@@ -1,0 +1,16 @@
+<odoo>
+    <template id="qweb_html" name="QWeb Tutorial Template">
+        <t t-name="qweb_tutorial.qweb_html">
+            <t t-call="website.layout">
+                <div class="container">
+                    <div class="row py-5">
+                        <div class="col">
+                            <h1>QWeb Tutorial</h1>
+                            <p>This is rendered using a custom controller.</p>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

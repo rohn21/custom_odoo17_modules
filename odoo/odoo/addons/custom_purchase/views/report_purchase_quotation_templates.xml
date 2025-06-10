@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <template id="report_purchasequotation_document_inherit" inherit_id="purchase.report_purchasequotation_document">
+        <!-- Add your fields inside the main page content -->
+        <xpath expr="//div[@class='page']" position="inside">
+            <div class="row mt16 mb16">
+                <div class="col-12">
+                    <h4>Additional Information</h4>
+                    <table class="table table-sm">
+                        <tr>
+                            <td><strong>Requested By:</strong></td>
+                            <td><span t-field="o.requester_name"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Project Code:</strong></td>
+                            <td><span t-field="o.project_code"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Delivery Deadline:</strong></td>
+                            <td><span t-field="o.delivery_deadline"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Urgent Request:</strong></td>
+<!--                            <td><span t-esc="o.is_urgent and 'Yes' +`497or 'No'"/></td>-->
+                        </tr>
+                        <tr>
+                            <td><strong>Internal Notes:</strong></td>
+                            <td><span t-field="o.internal_notes"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

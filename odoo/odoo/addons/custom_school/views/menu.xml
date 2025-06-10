@@ -1,0 +1,31 @@
+<odoo>
+    <!-- Top-level menu -->
+    <menuitem id="menu_custom_school_root"
+              name="Custom School"
+              sequence="10"
+              action="action_custom_school_students"
+              web_icon="custom_school,static/description/icon.png"/>
+
+    <!-- Submenu (optional) -->
+    <menuitem id="menu_custom_school_students"
+              name="Students"
+              parent="menu_custom_school_root"
+              sequence="10"/>
+
+    <!-- Action (optional) -->
+    <menuitem id="menu_custom_school_class_a"
+              name="Class A Students"
+              parent="menu_custom_school_students"
+              action="action_class_a_student"
+              />
+    <menuitem id="menu_custom_school_class_b"
+              name="Class B Students"
+              parent="menu_custom_school_students"
+              action="action_class_b_student"
+              />
+    <menuitem id="menu_custom_school_class_c"
+              name="Class C Students"
+              parent="menu_custom_school_students"
+              action="action_class_c_student"
+              />
+</odoo>

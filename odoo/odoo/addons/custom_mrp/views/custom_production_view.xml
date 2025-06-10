@@ -1,0 +1,26 @@
+<odoo>
+    <!-- Inherit and modify the original tree view -->
+    <record id="view_mrp_production_tree_view" model="ir.ui.view">
+        <field name="name">mrp.production.tree.inherit.custom</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='product_id']" position="replace" invisible="1"/>
+
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute name="string">Sales Reference</attribute>
+            </xpath>
+
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">x_qlty_alert</attribute>
+            </xpath>
+
+            <xpath expr="//tree" position="inside">
+                <field name="product_id" invisible="1"/>
+                <field name="x_qlty_alert" invisible="1"/>
+                <field name="x_status"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

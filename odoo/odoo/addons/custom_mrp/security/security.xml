@@ -1,0 +1,6 @@
+<odoo>
+    <record id="group_mrp_manager_custom" model="res.groups">
+        <field name="name">MRP Manager (Custom)</field>
+        <field name="category_id" ref="base.module_category_manufacturing"/>
+    </record>
+</odoo>

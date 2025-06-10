@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extend Manufacturing Order form view -->
+    <record id="view_mrp_production_form_inherit_custom" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit.custom.workorders</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+
+            <!-- Modify Work Orders tab -->
+            <xpath expr="//page[@name='operations']/field[@name='workorder_ids']" position="replace">
+                <field name="workorder_ids"
+                       readonly="state == 'cancel' or (state == 'done' and is_locked)"
+                       context="{'tree_view_ref': 'custom_mrp.workorder_tree_custom', 'default_product_uom_id': product_uom_id, 'from_manufacturing_order': True}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Custom tree view for work orders inside manufacturing order -->
+    <record id="workorder_tree_custom" model="ir.ui.view">
+        <field name="name">mrp.workorder.tree.custom</field>
+        <field name="model">mrp.workorder</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="workcenter_id"/>
+                <field name="company_id"/>
+                <field name="state"/>
+                <field name="x_machine_code"/>
+                <field name="x_shift"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

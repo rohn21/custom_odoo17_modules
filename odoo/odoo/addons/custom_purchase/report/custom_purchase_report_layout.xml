@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--custom_purchase_report_layout.xml-->
+<odoo>
+    <!-- 1. Custom External Layout for Purchase Order Only -->
+    <template id="external_layout_purchase_custom">
+        <!-- Copy of web.external_layout_standard -->
+        <t t-call="web.external_layout">
+            <t t-set="company" t-value="doc.company_id"/>
+            <t t-set="report_type" t-value="report_type"/>
+
+            <!-- Now you can safely use company, report_type, o etc. -->
+            <div class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-9 text-left">
+                    <strong t-field="company.name"/>
+                    <br/>
+                    <span t-if="company.partner_id">
+                        <t t-esc="', '.join(filter(None, [
+                  company.partner_id.street,
+                  company.partner_id.city,
+                  company.partner_id.state_id.name if company.partner_id.state_id else '',
+                  company.partner_id.country_id.name if company.partner_id.country_id else '',
+                  company.partner_id.zip
+                ]))"/>
+                    </span>
+                </div>
+                <div class="col-3 text-end">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 60px;"
+                         alt="Logo"/>
+                </div>
+            </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 text-end">
+                    <strong>Authorized Signature:</strong>
+                    <div style="border-bottom: 1px solid #000; height: 2em; width: 60%; margin-top: 0.5em; float: right;"></div>
+                    <p style="margin-top: 0.2em;">Name &amp; Title</p>
+                </div>
+            </div>
+
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb4">
+                        <div t-field="company.report_footer"/>
+                    </ul>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                    <div t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted">
+                        <span t-out="o.name"/>
+                    </div>
+                </div>
+            </div>
+            <t t-out="0"/>
+        </t>
+    </template>
+</odoo>

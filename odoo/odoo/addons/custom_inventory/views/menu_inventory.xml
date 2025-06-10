@@ -1,0 +1,6 @@
+<odoo>
+    <menuitem id="menu_inventory_root_custom" name="Inventory Custom" sequence="10" parent="base.menu_custom"/>
+
+    <menuitem id="menu_product_custom" name="Products" parent="menu_inventory_root_custom" action="product.product_template_action_all"/>
+    <menuitem id="menu_warehouse_custom" name="Warehouses" parent="menu_inventory_root_custom" action="stock.action_warehouse_form"/>
+</odoo>

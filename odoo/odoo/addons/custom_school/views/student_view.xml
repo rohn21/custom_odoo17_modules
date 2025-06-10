@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_class_a_student_tree_short" model="ir.ui.view">
+        <field name="name">class.a.student.short.tree</field>
+        <field name="model">class_a.student</field>
+        <field name="arch" type="xml">
+            <tree string="All Students">
+                <field name="name"/>
+                <field name="grade"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    Top level menu "Custom School" view-->
+    <record id="action_custom_school_students" model="ir.actions.act_window">
+    <field name="name">Students</field>
+    <field name="res_model">class_a.student</field> <!-- Or use a custom unified model if needed -->
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="view_class_a_student_tree_short"/>
+</record>
+
+
+    <record id="action_class_a_student" model="ir.actions.act_window">
+        <field name="name">Class A Students</field>
+        <field name="res_model">class_a.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_class_b_student" model="ir.actions.act_window">
+        <field name="name">Class B Students</field>
+        <field name="res_model">class_b.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_class_c_student" model="ir.actions.act_window">
+        <field name="name">Class C Students</field>
+        <field name="res_model">class_c.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

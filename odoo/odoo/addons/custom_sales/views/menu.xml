@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem
+        id="menu_custom_sales_root"
+        name="Custom Sales Extension"
+        parent="base.menu_root"
+        sequence="10"
+    />
+</odoo>

@@ -1,0 +1,22 @@
+<odoo>
+  <!-- Inherit the existing sale.order report template -->
+  <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+    <xpath expr="//div[@class='page']//table[@class='table table-sm mt32 mb32']/tfoot" position="before">
+      <!-- Insert a summary row for Project Code -->
+      <tr>
+        <td colspan="2"><strong>Project Code:</strong></td>
+        <td><t t-esc="o.x_project_code or '-'"/></td>
+      </tr>
+      <!-- Insert a summary row for Estimated Shipping Date -->
+      <tr>
+        <td colspan="2"><strong>Estimated Shipping:</strong></td>
+        <td>
+          <t t-if="o.x_estimated_shipping">
+            <t t-esc="o.x_estimated_shipping.strftime('%d %B %Y')"/>
+          </t>
+          <t t-else="">-</t>
+        </td>
+      </tr>
+    </xpath>
+  </template>
+</odoo>

@@ -1,0 +1,32 @@
+<!--report_purchaseorder_document_inherit-->
+<odoo>
+  <template id="report_purchaseorder_document_inherit" inherit_id="purchase.report_purchaseorder_document">
+    <xpath expr="//table[hasclass('table') and hasclass('table-sm')][last()]" position="before">
+      <div class="mt16">
+        <h4>Additional Information</h4>
+        <table class="table table-sm">
+          <tr>
+            <td><strong>Requested By:</strong></td>
+            <td><span t-field="doc.requester_name"/></td>
+          </tr>
+          <tr>
+            <td><strong>Project Code:</strong></td>
+            <td><span t-field="doc.project_code"/></td>
+          </tr>
+          <tr>
+            <td><strong>Delivery Deadline:</strong></td>
+            <td><span t-field="doc.delivery_deadline"/></td>
+          </tr>
+          <tr>
+            <td><strong>Urgent Request:</strong></td>
+            <td><span t-esc="doc.is_urgent and 'Yes' or 'No'"/></td>
+          </tr>
+          <tr>
+            <td><strong>Internal Notes:</strong></td>
+            <td><span t-field="doc.internal_notes"/></td>
+          </tr>
+        </table>
+      </div>
+    </xpath>
+  </template>
+</odoo>

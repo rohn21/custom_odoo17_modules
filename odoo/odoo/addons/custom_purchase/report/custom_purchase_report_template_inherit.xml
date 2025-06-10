@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 2. Override Purchase Order Report to use the Custom Layout -->
+    <template id="report_purchaseorder_document_inherit_custom" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <t t-set="doc" t-value="o"/>
+            <t t-call="custom_purchase.external_layout_purchase_custom"/>
+        </xpath>
+
+        <!-- Optional: Remove Discount Column -->
+<!--        <xpath expr="//th[@name='th_discount']" position="replace"/>-->
+<!--        <xpath expr="//td[span[span[@t-field='line.discount']]]" position="replace"/>-->
+
+        <!-- Optional: Add Signature after Notes -->
+<!--        <xpath expr="//p[@t-field='o.notes']" position="after">-->
+<!--            <div class="row mt-4">-->
+<!--                <div class="col-6">-->
+<!--                    <strong>Authorized Signature:</strong>-->
+<!--                    <div style="border-bottom: 1px solid #000; height: 2em; width: 80%; margin-top: 0.5em;"></div>-->
+<!--                    <p style="margin-top: 0.2em;">Name &amp; Title</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </xpath>-->
+    </template>
+</odoo>
