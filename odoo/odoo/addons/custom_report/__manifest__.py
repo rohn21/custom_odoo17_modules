@@ -26,7 +26,6 @@ Long description of module's purpose
         # 'views/views.xml',
         # 'views/templates.xml',
         # 'reports/ir_actions_report.xml',
-        # 'reports/sale_order_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
