@@ -1,48 +1,148 @@
 <odoo>
 
-  <template id="travel_event_calendar" name="Travel Website Calendar">
-    <t t-call="website.layout">
-      <div class="container">
-        <h2>Travel Booking Calendar</h2>
-        <div id="calendar"></div>
-      </div>
+    <template id="event_calendar" name="Website Calendar">
 
-      <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet"/>
-      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+        <t t-call="website.layout">
+            <style type="text/css">
+                .faded-input {
+                background-color: #f8f9fa;
+                border: 1px solid #ced4da;
+                }
+            </style>
 
-      <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-          const calendarEl = document.getElementById('calendar');
-          const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-        titleFormat:{
-            month: 'long',
-            year: 'numeric',
-            day: 'numeric',
-            weekday: 'short'
-          },
-        headerToolbar: {
-              left: 'prev,next today',
-              center: 'title',
-             right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-            events: [
-              <t t-foreach="events" t-as="ev">
-                <t t-if="ev.start_date and ev.stop_date">
-                  {
-                    title: "<t t-esc='ev.name'/>",
-                    start: "<t t-esc='ev.start_date.isoformat()'/>",
-                    end: "<t t-esc='ev.stop_date.isoformat()'/>"
-                  }<t t-if="not loop.last">,</t>
+            <div class="container mt-4">
+                <h2>Calendar</h2>
+                <div id="calendar"></div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <form id="appointment-form">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel">Create Appointment</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="event-name ">Event Name</label>
+                                        <input type="text" class="form-control faded-input" id="event-name"
+                                               placeholder="Meeting with team" required="required"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="event-description">Description</label>
+                                        <input type="text" class="form-control faded-input" id="event-description"
+                                               placeholder="e.g. Project discussion"/>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="event-start">Start Date</label>
+                                        <input type="datetime-local" class="form-control faded-input" id="event-start"
+                                               required="required"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="event-end">End Date</label>
+                                        <input type="datetime-local" class="form-control faded-input" id="event-end"
+                                               required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save Appointment</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet"/>
+            <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+            <script type="text/javascript">
+                document.addEventListener('DOMContentLoaded', function () {
+                const calendarEl = document.getElementById('calendar');
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                selectable: true,
+                select: function (info) {
+                $('#appointment-form')[0].reset();
+                $('#event-start').val(info.startStr + " 09:00");
+                $('#event-end').val(info.endStr + " 17:00");
+                $('#appointmentModal').modal('show');
+                },
+                events: [
+                <t t-foreach="events" t-as="ev" t-index="i">
+                    <t t-if="ev.start_date and ev.end_date">
+                        {
+                        title: "<t t-esc='ev.name'/>",
+                        start: "<t t-esc='ev.start_date.isoformat()'/>",
+                        end: "<t t-esc='ev.end_date.isoformat()'/>"
+                        }
+                        <t t-if="i != (len(events) - 1)">,</t>
+                    </t>
                 </t>
-              </t>
-            ],
-        selectable: true,
-          });
-          calendar.render();
-        });
-      </script>
-    </t>
-  </template>
+                ],
+                });
+                calendar.render();
 
+                // Form Submission
+                $('#appointment-form').on('submit', function (e) {
+                e.preventDefault();
+                const name = $('#event-name').val();
+                const start = $('#event-start').val();
+                const end = $('#event-end').val();
+                const description = $('#event-description').val();
+
+                if (name &amp;&amp; start &amp;&amp; end) {
+                $.ajax({
+                url: '/api/appointment/create',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                name: name,
+                start_date: start,
+                end_date: end,
+                description: description
+                }),
+                success: function (response) {
+                if (response.success) {
+                $('#appointmentModal').modal('hide');
+                calendar.addEvent({
+                title: name,
+                start: start.replace(' ', 'T'),
+                end: end.replace(' ', 'T')
+                });
+                } else {
+                alert("Error: " + response.error);
+                }
+                }
+                });
+                }
+                });
+                $('#appointmentModal').on('hidden.bs.modal', function () {
+                $('#event-name').val('');
+                $('#event-start').val('');
+                $('#event-end').val('');
+                $('#event-description').val('');
+                });
+                });
+            </script>
+        </t>
+    </template>
 </odoo>
