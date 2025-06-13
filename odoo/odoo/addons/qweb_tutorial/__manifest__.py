@@ -18,13 +18,19 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'website'],
+    'depends': ['base', 'calendar', 'website'],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         # 'views/views.xml',
         'views/qweb_template.xml',
+        'views/custom_webpage_view.xml',
+        # 'views/custom_calendar_view.xml',
+        'views/custom_calendar_backend.xml', #with custom_model, view(xml)
+        'views/render_calendar.xml',  #with custom_model, view(xml)
+        'views/custom_booking_template.xml',
+        'data/sample_booking_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

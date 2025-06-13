@@ -1,19 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
+from odoo import models, fields, api
 
+class TravelDetail(models.Model):
+    _name = 'travel.detail'
+    _description = 'Travel Booking Detail'
 
-# class qweb_tutorial(models.Model):
-#     _name = 'qweb_tutorial.qweb_tutorial'
-#     _description = 'qweb_tutorial.qweb_tutorial'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
-
+    name = fields.Char(string='Event name')
+    partner_id = fields.Many2one('res.partner', string='Customer')
+    partner_mobile = fields.Char(string='Mobile Number')
+    passenger_count = fields.Integer(string='Number of Passengers')
+    start_date = fields.Datetime(string='Start Date')
+    stop_date = fields.Datetime(string="End Date")
