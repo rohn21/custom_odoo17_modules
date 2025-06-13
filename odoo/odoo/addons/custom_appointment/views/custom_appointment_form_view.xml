@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_custom_appointment_form" model="ir.ui.view">
+        <field name="name">custom.appointment.view.form</field>
+        <field name="model">custom.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Appointment">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="description"/>
+                        <field name="attendee_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_custom_appointment_tree" model="ir.ui.view">
+        <field name="name">custom.appointment.tree</field>
+        <field name="model">custom.appointment</field>
+        <field name="arch" type="xml">
+            <tree string="Appointments">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="attendee_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_custom_appointment_calendar" model="ir.ui.view">
+        <field name="name">custom.appointment.calendar</field>
+        <field name="model">custom.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Appointment Calendar"
+                      date_start="start_date"
+                      date_stop="end_date"
+                      color="attendee_ids">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+
+
+    <record id="action_custom_appointment" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="res_model">custom.appointment</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="help" type="html">
+            <p>Create and manage your appointments here.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_custom_appointment_root" name="Appointments" sequence="10"/>
+    <menuitem id="menu_custom_appointment_main" name="Manage Appointments"
+              parent="menu_custom_appointment_root" action="action_custom_appointment"/>
+</odoo>
