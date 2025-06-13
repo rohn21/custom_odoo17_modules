@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api
 
+
 class TravelDetail(models.Model):
     _name = 'travel.detail'
     _description = 'Travel Booking Detail'
@@ -11,4 +12,4 @@ class TravelDetail(models.Model):
     partner_mobile = fields.Char(string='Mobile Number')
     passenger_count = fields.Integer(string='Number of Passengers')
     start_date = fields.Datetime(string='Start Date')
-    stop_date = fields.Datetime(string="End Date")
+    end_date = fields.Datetime(string="End Date")
