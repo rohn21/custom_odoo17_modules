@@ -1,0 +1,39 @@
+<odoo>
+  <record id="view_travel_detail_calendar" model="ir.ui.view">
+    <field name="name">travel.detail.calendar</field>
+    <field name="model">travel.detail</field>
+    <field name="arch" type="xml">
+      <calendar string="Travel Calendar" date_start="start_date" date_stop="stop_date" color="partner_id">
+        <field name="name"/>
+        <field name="partner_id"/>
+      </calendar>
+    </field>
+  </record>
+
+  <record id="view_form_travel_detail" model="ir.ui.view">
+  <field name="name">travel.detail.form</field>
+  <field name="model">travel.detail</field>
+  <field name="arch" type="xml">
+    <form string="Travel Booking">
+      <sheet>
+        <group>
+          <field name="name"/>
+          <field name="start_date"/>
+          <field name="stop_date"/>
+          <field name="partner_id"/>
+        </group>
+      </sheet>
+    </form>
+  </field>
+</record>
+
+
+  <record id="action_travel_detail_calendar" model="ir.actions.act_window">
+    <field name="name">Travel Calendar</field>
+    <field name="res_model">travel.detail</field>
+    <field name="view_mode">calendar,tree,form</field>
+  </record>
+
+  <menuitem id="menu_travel_calendar_root" name="Travel Bookings"/>
+  <menuitem id="menu_travel_calendar" name="Calendar" parent="menu_travel_calendar_root" action="action_travel_detail_calendar"/>
+</odoo>

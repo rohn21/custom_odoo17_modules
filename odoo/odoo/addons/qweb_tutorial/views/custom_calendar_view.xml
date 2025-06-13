@@ -1,0 +1,60 @@
+<odoo>  <!--using js and xml only-->
+  <template id="custom_calendar_page" name="Custom Calendar Page">
+    <t t-call="website.layout">
+      <t t-set="pageName" t-value="'custom_calendar_page'"/>
+
+      <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet"/>
+
+      <div class="container">
+        <h2>Calendar</h2>
+        <div id="calendar"></div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+      <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+          var calendarEl = document.getElementById('calendar');
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            titleFormat:{
+            month: 'long',
+            year: 'numeric',
+            day: 'numeric',
+            weekday: 'short'
+          },
+              customButtons: {
+              myCustomButton: {
+                text: 'Add Booking',
+                click: function () {
+                  alert('Add Booking button clicked!');
+                }
+              }
+            },
+            headerToolbar: {
+              left: 'prev,next today',
+<!--              left: 'prev,next today myCustomButton',-->
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: [
+              {
+                title: 'Trip to Goa',
+                start: '2025-06-15',
+                end: '2025-06-18'
+              },
+              {
+                title: 'Business Meeting',
+                start: '2025-06-20'
+              }
+            ],
+          selectable: true
+          });
+          calendar.render();
+        });
+      </script>
+    </t>
+  </template>
+
+
+</odoo>

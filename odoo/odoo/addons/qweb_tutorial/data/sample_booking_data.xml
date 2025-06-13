@@ -1,0 +1,35 @@
+<!-- File: data/sample_booking_data.xml -->
+<!--<odoo>-->
+<!--    <record id="travel_1" model="travel.detail">-->
+<!--        <field name="name">Alice Smith</field>-->
+<!--        <field name="destination">Paris</field>-->
+<!--        <field name="travel_date">2025-07-01</field>-->
+<!--        <field name="return_date">2025-07-10</field>-->
+<!--        <field name="travel_mode">air</field>-->
+<!--        <field name="cost">1200.50</field>-->
+<!--    </record>-->
+
+<!--    <record id="travel_2" model="travel.detail">-->
+<!--        <field name="name">John Doe</field>-->
+<!--        <field name="destination">Goa</field>-->
+<!--        <field name="travel_date">2025-07-15</field>-->
+<!--        <field name="return_date">2025-07-20</field>-->
+<!--        <field name="travel_mode">train</field>-->
+<!--        <field name="cost">450.00</field>-->
+<!--    </record>-->
+<!--</odoo>-->
+
+<odoo>
+    <record id="travel_detail_demo1" model="travel.detail">
+        <field name="partner_id" ref="base.res_partner_2"/>
+        <field name="partner_mobile">9876543210</field>
+        <field name="passenger_count">2</field>
+    </record>
+
+    <record id="travel_detail_demo2" model="travel.detail">
+        <field name="partner_id" ref="base.res_partner_3"/>
+        <field name="partner_mobile">9123456789</field>
+        <field name="passenger_count">4</field>
+    </record>
+</odoo>
+

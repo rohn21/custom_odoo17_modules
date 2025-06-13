@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="booking_details" name="Travel booking">
+        <t t-call="website.layout">
+            <center><h2>Travel Booking Details</h2></center>
+
+            <div class="oe_structure or_empty">
+                <div><h5><a href="/travel/calendar">Calendar</a></h5></div>
+                <div class="container">
+                    <t t-set="i" t-value="1"/>
+                    <t t-foreach="data" t-as="o">
+                        <div>
+                    <h3>Booking</h3>
+                    <h6 t-field="o.partner_id.name"/>
+                    <h6 t-field="o.partner_mobile"/>
+                    <h6 t-field="o.passenger_count"/>
+                    <t t-set="i" t-value="i+1"/>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
